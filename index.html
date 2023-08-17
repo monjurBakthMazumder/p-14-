@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- daisy ui and tailwind cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.5.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>নামতা অ্যাপ</title>
+</head>
+<body class="mx-auto text-center p-5 text-white">
+    <h1 class="text-4xl md:text-6xl xl:text-7xl font-bold my-5">নামতা অ্যাপ</h1>
+    <input id="input" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs my-5" />
+    <div class="flex justify-center items-center flex-wrap gap-5  md:my-5">
+        <button id="generate" class="btn btn-outline btn-success">Generate</button>
+        <button id="reset" class="btn btn-outline btn-info">Reset</button>
+    </div>
+    <div class="overflow-x-auto my-5 w-fit mx-auto">
+        <table class="table border-2 border-gray-600">
+        <!-- head -->
+        <thead>
+            <!-- <caption colspan="5" class="text-center">Hours</caption> -->
+            <tr>
+            <th colspan="5" class="text-center text-white text-xl md:text-2xl xl:text-4xl"><span id="title"></span>নামতা</th>
+            </tr>
+        </thead>
+            <tbody id="result">
+            </tbody>
+        </table>
+    </div>
+
+<script>
+    const generate = document.getElementById('generate');
+    const reset = document.getElementById('reset');
+    generate.addEventListener('click', function(){
+        const inputFiled = document.getElementById('input');
+        const inputString = inputFiled.value;
+        inputFiled.value = '';
+        const input = Number(inputString);
+        const result = document.getElementById('result');
+        result.innerText ='';
+        if(isNaN(input)){
+            alert('please enter Number');
+            return;
+        }
+        document.getElementById('title').innerText= input +" এর ";
+        for(i = 1; i<= 10; i++){
+            const tr = document.createElement('tr');
+            const a = document.createElement('th');
+            const b = document.createElement('th');
+            const c = document.createElement('th');
+            const d = document.createElement('th');
+            const e = document.createElement('th');
+            a.innerText = input;
+            b.innerText = '*';
+            c.innerText = i;
+            d.innerText = '=';
+            e.innerText = i*input;
+            tr.appendChild(a);
+            tr.appendChild(b);
+            tr.appendChild(c);
+            tr.appendChild(d);
+            tr.appendChild(e);
+            result.appendChild(tr)
+        }
+    });
+    reset.addEventListener('click', function(){
+        const result = document.getElementById('result');
+        result.innerText ='';
+        document.getElementById('title').innerText='';
+    })
+</script>
+</body>
+</html>
